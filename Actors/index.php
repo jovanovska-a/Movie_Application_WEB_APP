@@ -15,15 +15,15 @@ if($action == "list_actors"){
         $actors = get_actors_by_search($_GET["search"]);
         $search = $_GET["search"];
     }else{
-        $actors = getAllActors();
+        $actors = get_allActors();
         $search = "";
     }
     include("ShowActors.php");
 }
 
 if($action == "details"){
-    $actor = getActorById($_GET["actorID"]);
-    $movies = getMoviesByActorId($_GET["actorID"]);
+    $actor = get_actor_by_actorId($_GET["actorID"]);
+    $movies = get_movies_by_actorId($_GET["actorID"]);
     include("Details.php");
 }
 
@@ -42,7 +42,7 @@ if($action == "delete_actor"){
 }
 
 if($action == "show_edit_form"){
-    $actor = getActorById($_GET["actorID"]);
+    $actor = get_actor_by_actorId($_GET["actorID"]);
     include("EditActor.php");
 }
 

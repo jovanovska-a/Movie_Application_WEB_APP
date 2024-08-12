@@ -31,7 +31,7 @@
         exit();
     } else if($action == "show_add_form"){
         $genres = get_genres();
-        $actors = getAllActors();
+        $actors = get_allActors();
         $creative_directors = get_creative_directors();
         include('AddMovie.php');
     } else if($action == "add"){

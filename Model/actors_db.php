@@ -1,5 +1,5 @@
 <?php
-function getAllActors(){
+function get_allActors(){
   global $db;
   $query = 'SELECT * FROM actors
             ORDER BY ActorID';
@@ -7,7 +7,7 @@ function getAllActors(){
   return $result;
 }
 
-function getActorById($actorID){
+function get_actor_by_actorId($actorID){
   global $db;
   $query = "SELECT * FROM actors
             WHERE ActorID = $actorID";
@@ -16,7 +16,7 @@ function getActorById($actorID){
   return $actor;
 }
 
-function getMoviesByActorId($actorID){
+function get_movies_by_actorId($actorID){
   global $db;
   $query = "SELECT * FROM movies
             JOIN movies_actors ON movies.MovieID = movies_actors.MovieID
