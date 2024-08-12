@@ -11,15 +11,45 @@ if(isset($_POST["action"])){
 }
 
 if($action == "list_actors"){
-    $actors = getAllActors();
-    include("ListActors.php");
+    if(isset($_GET["search"])){
+        $actors = get_actors_by_search($_GET["search"]);
+        $search = $_GET["search"];
+    }else{
+        $actors = getAllActors();
+        $search = "";
+    }
+    include("ShowActors.php");
 }
 
 if($action == "details"){
     $actor = getActorById($_GET["actorID"]);
-    var_dump($actor);
-    include("ActorDetails.php");
+    $movies = getMoviesByActorId($_GET["actorID"]);
+    include("Details.php");
 }
 
+if($action == "show_add_form"){
+    include("AddActor.php");
+}
+
+if($action == "add_actor"){
+    add_actor($_POST["FullName"], $_POST["Biography"], $_POST["BirthDate"], $_POST["Nationality"], $_POST["ActorImageUrl"]);
+    header("Location: .");
+}
+
+if($action == "delete_actor"){
+    delete_actor($_POST["actorID"]);
+    header("Location: .");
+}
+
+if($action == "show_edit_form"){
+    $actor = getActorById($_GET["actorID"]);
+    include("EditActor.php");
+}
+
+if($action == "edit_actor"){
+    edit_actor($_POST["actorID"], $_POST["FullName"], $_POST["Biography"], $_POST["BirthDate"], $_POST["Nationality"], $_POST["ActorImageUrl"]);
+    $actorID = $_POST["actorID"];
+    header("Location: .?action=details&actorID=$actorID");
+}
 
 ?>
