@@ -64,9 +64,7 @@ section .section-title {
 <a href="?action=show_add_form" class="btn btn-primary">Add Actor</a>
 
 <form method="GET">
-
     <input type="input" placeholder="Search actors" name="search" value ="<?php echo $search ?>"/>
-
     <button type="submit">Search</button>
 </form>
 

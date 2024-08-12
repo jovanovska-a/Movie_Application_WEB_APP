@@ -8,24 +8,36 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .btn-custom {
-            background-color: #28a745; /* Green color */
+            background-color: #28a745; 
             border-color: #28a745;
-            font-size: 0.875rem; /* Slightly smaller font size */
+            font-size: 0.875rem; 
         }
         .btn-custom:hover {
-            background-color: #218838; /* Darker green on hover */
+            background-color: #218838; 
             border-color: #1e7e34;
         }
         .custom-btn-container {
             display: flex;
-            justify-content: flex-end; /* Aligns button to the right */
+            justify-content: flex-end; 
             margin-bottom: 1.5rem;
+        }
+        .search-add-form {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        .search-bar input {
+            margin-right: 10px; 
         }
     </style>
 </head>
 <body>
 
-<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">MyMovies</a>
@@ -56,20 +68,23 @@
     </div>
 </nav>
 
-<!-- Main Content -->
 <div class="album py-3 bg-light">
     <div class="container">
-        <div class="custom-btn-container">
+        <form method="GET" class="search-add-form">
+            <div class="search-bar">
+                <input type="input" placeholder="Search actors" name="search" value ="<?php echo $search ?>"/>
+                <button type="submit">Search</button>
+            </div>
             <a href="?action=show_add_form" class="btn btn-custom">Add New Movie</a>
-        </div>
-        <div class="row">
+        </form>
+        <div class="row py-4">
             <?php foreach($movies as $movie) : ?>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
                         <img class="card-img-top" src="<?php echo $movie['MovieImageUrl'] ?>" alt="Card image cap">
                         <div class="card-body">
                             <p class="card-text"><?php echo $movie['Title'] ?></p>
-                            <p class="card-text">- <?php echo $movie['FullName'] ?></p>
+                            <p class="card-text">- <?php echo $movie['DirectorName'] ?></p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-outline-secondary">
@@ -87,7 +102,6 @@
     </div>
 </div>
 
-<!-- Bootstrap JS (Popper.js is included with Bootstrap 5) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
