@@ -56,7 +56,7 @@
         $description = $_POST['description'];
         $price = $_POST['price'];
         $date = $_POST['publication_date'];
-        $url = $_POST['image_url'];
+        $url = $_POST['ImageUrl'];
 
         if (empty($selectedGenres) || empty($selectedActors) || empty($creative_director) || empty($title) || empty($duration) || empty($description) || empty($price) || empty($date) || empty($url)) {
             $error = "Invalid product data. Check all fields and try again.";

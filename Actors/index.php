@@ -32,7 +32,12 @@ if($action == "show_add_form"){
 }
 
 if($action == "add_actor"){
-    add_actor($_POST["FullName"], $_POST["Biography"], $_POST["BirthDate"], $_POST["Nationality"], $_POST["ActorImageUrl"]);
+    if(empty($_POST["FullName"]) || empty($_POST["Biography"]) || empty($_POST["BirthDate"]) || empty($_POST["Nationality"]) || empty($_POST["ImageUrl"])){
+        $error = "Invalid product data. Check all fields and try again.";
+        include('../errors/error.php');
+        die();
+    }
+    add_actor($_POST["FullName"], $_POST["Biography"], $_POST["BirthDate"], $_POST["Nationality"], $_POST["ImageUrl"]);
     header("Location: .");
 }
 
@@ -47,6 +52,11 @@ if($action == "show_edit_form"){
 }
 
 if($action == "edit_actor"){
+    if(empty($_POST["actorID"]) || empty($_POST["FullName"]) || empty($_POST["Biography"]) || empty($_POST["BirthDate"]) || empty($_POST["Nationality"]) || empty($_POST["ActorImageUrl"])){
+        $error = "Invalid product data. Check all fields and try again.";
+        include('../errors/error.php');
+        die();
+    }
     edit_actor($_POST["actorID"], $_POST["FullName"], $_POST["Biography"], $_POST["BirthDate"], $_POST["Nationality"], $_POST["ActorImageUrl"]);
     $actorID = $_POST["actorID"];
     header("Location: .?action=details&actorID=$actorID");

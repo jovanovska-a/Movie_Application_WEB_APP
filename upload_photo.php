@@ -11,7 +11,7 @@
  if(in_array($ext, $allowed_ext) && $photo["size"] < 2000000) {
     move_uploaded_file($photo["tmp_name"], $photo_path);
 
-    echo json_encode(["success" => true, "ActorImageUrl" => "../" . $photo_path]);
+    echo json_encode(["success" => true, "ImageUrl" => "../" . $photo_path]);
 
  }else{
     echo json_encode(["success" => false, "error" => "Invalid file"]);

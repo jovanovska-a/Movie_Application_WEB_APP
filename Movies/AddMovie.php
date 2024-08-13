@@ -1,3 +1,6 @@
+
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+
 <div id="main">
     <h1>Add Movie</h1>
     <form action="index.php" method="post" id="add_movie">
@@ -44,11 +47,37 @@
         <label>Publication Date</label>
         <input type="date" name="publication_date"/>
         <br />
-        <label>Image Url</label>
-        <input type="input" name="image_url"/>
+        <input type="hidden" name="ImageUrl" id="imageUrl"/>
+        <div id="dropzone-upload" class="dropzone"></div>
         <br />
         <label>&nbsp;</label>
         <input type="submit" value="Add" />
         <br />
     </form>
 </div>
+
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+<script>
+    Dropzone.options.dropzoneUpload = {
+        url: "../upload_photo.php",
+        paramName: "photo",
+        maxFilesize: 20,
+        maxFiles:1,
+        acceptedFiles: "image/*",
+        init: function(){
+            this.on("maxfilesexceeded", function(file){
+               this.removeAllFiles();
+               this.addFile(file);
+            });
+            this.on("success", function (file, response){
+                const jsonResponse = JSON.parse(response);
+                if(jsonResponse.success){
+                    document.getElementById("imageUrl").value = jsonResponse.ImageUrl;
+                }else{
+                    console.error(jsonResponse.error);
+                }
+            });
+        }
+    }
+
+</script>
