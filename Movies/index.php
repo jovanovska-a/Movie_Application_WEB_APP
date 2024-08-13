@@ -91,7 +91,7 @@
         $description = $_POST['description'];
         $price = $_POST['price'];
         $date = $_POST['publication_date'];
-        $url = $_POST['image_url'];
+        $url = $_POST['ImageUrl'];
         
         if (empty($title) || empty($duration) || empty($description) || empty($price) || empty($date) || empty($url)) {
             $error = "Invalid product data. Check all fields and try again.";
@@ -99,6 +99,11 @@
         }
         else
         {
+            if($_POST["oldImageUrl"] != $_POST["ImageUrl"]){
+                if(file_exists($_POST["oldImageUrl"])){
+                    unlink($_POST["oldImageUrl"]);
+                }
+            }
             edit_movie($id, $selectedGenres, $selectedActors, $creative_director, $title, $duration, $description, $price, $date, $url);
             header("Location: .?action=details&id=$id");
         }

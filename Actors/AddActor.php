@@ -45,7 +45,7 @@
                 if(myDropzone.getQueuedFiles().length > 0){
                     myDropzone.processQueue();
                 }else{
-                    this.submit; // ako nema slika prikacheno kje napravem submit i kje pokazhe error deka nema ImageUrl
+                    document.getElementById("addForm").submit(); // ako nema slika prikacheno kje napravem submit i kje pokazhe error deka nema ImageUrl
                 }
             });
             this.on("success", function (file, response){

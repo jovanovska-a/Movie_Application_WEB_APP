@@ -55,12 +55,19 @@ if($action == "show_edit_form"){
 }
 
 if($action == "edit_actor"){
-    if(empty($_POST["actorID"]) || empty($_POST["FullName"]) || empty($_POST["Biography"]) || empty($_POST["BirthDate"]) || empty($_POST["Nationality"]) || empty($_POST["ActorImageUrl"])){
+    if(empty($_POST["actorID"]) || empty($_POST["FullName"]) || empty($_POST["Biography"]) || empty($_POST["BirthDate"]) || empty($_POST["Nationality"]) || empty($_POST["ImageUrl"])){
         $error = "Invalid product data. Check all fields and try again.";
         include('../errors/error.php');
         die();
     }
-    edit_actor($_POST["actorID"], $_POST["FullName"], $_POST["Biography"], $_POST["BirthDate"], $_POST["Nationality"], $_POST["ActorImageUrl"]);
+
+    if($_POST["oldImageUrl"] != $_POST["ImageUrl"]){
+        if(file_exists($_POST["oldImageUrl"])){
+            unlink($_POST["oldImageUrl"]);
+        }
+    }
+
+    edit_actor($_POST["actorID"], $_POST["FullName"], $_POST["Biography"], $_POST["BirthDate"], $_POST["Nationality"], $_POST["ImageUrl"]);
     $actorID = $_POST["actorID"];
     header("Location: .?action=details&actorID=$actorID");
 }

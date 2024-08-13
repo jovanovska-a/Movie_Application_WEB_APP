@@ -56,12 +56,19 @@
 
     } else if($action == "edit_director"){
 
-        if(empty($_POST["directorID"]) || empty($_POST["FullName"]) || empty($_POST["Biography"]) || empty($_POST["BirthDate"]) || empty($_POST["Nationality"]) || empty($_POST["DirectorImageUrl"])){
+        if(empty($_POST["directorID"]) || empty($_POST["FullName"]) || empty($_POST["Biography"]) || empty($_POST["BirthDate"]) || empty($_POST["Nationality"]) || empty($_POST["ImageUrl"])){
             $error = "Invalid product data. Check all fields and try again.";
             include('../errors/error.php');
             die();
         }
-        edit_director($_POST["directorID"], $_POST["FullName"], $_POST["Biography"], $_POST["BirthDate"], $_POST["Nationality"], $_POST["DirectorImageUrl"]);
+
+        if($_POST["oldImageUrl"] != $_POST["ImageUrl"]){
+            if(file_exists($_POST["oldImageUrl"])){
+                unlink($_POST["oldImageUrl"]);
+            }
+        }
+
+        edit_director($_POST["directorID"], $_POST["FullName"], $_POST["Biography"], $_POST["BirthDate"], $_POST["Nationality"], $_POST["ImageUrl"]);
         $directorID = $_POST["directorID"];
         header("Location: .?action=details&id=$directorID");
     } 
