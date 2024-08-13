@@ -42,6 +42,9 @@ if($action == "add_actor"){
 }
 
 if($action == "delete_actor"){
+    if(file_exists($_POST["ImageUrl"])){
+        unlink($_POST["ImageUrl"]);
+    }
     delete_actor($_POST["actorID"]);
     header("Location: .");
 }

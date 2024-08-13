@@ -11,6 +11,7 @@
 <form method="POST">
     <input hidden value="delete_actor" name="action"/>
     <input hidden value="<?php echo $actor["ActorID"] ?>" name="actorID"/>
+    <input hidden value="<?php echo $actor["ActorImageUrl"] ?>" name="ImageUrl"/>
 
     <button type="submit">Delete</button>
 </form>

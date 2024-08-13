@@ -3,7 +3,7 @@
 
 <div id="main">
     <h1>Add Movie</h1>
-    <form action="index.php" method="post" id="add_movie">
+    <form action="index.php" method="post" enctype="multipart/form-data" id="addForm">
         <input type="hidden" name="action" value="add_movie" />
         <label for="genres">Genres:</label>
         <select name="genre_ids[]" id="genres" multiple>
@@ -64,15 +64,27 @@
         maxFilesize: 20,
         maxFiles:1,
         acceptedFiles: "image/*",
+        autoProcessQueue: false,
         init: function(){
+            var myDropzone = this;
             this.on("maxfilesexceeded", function(file){
                this.removeAllFiles();
                this.addFile(file);
+            });
+            document.getElementById("addForm").addEventListener("submit", function(e){
+                e.preventDefault();
+
+                if(myDropzone.getQueuedFiles().length > 0){
+                    myDropzone.processQueue();
+                }else{
+                    this.submit; // ako nema slika prikacheno kje napravem submit i kje pokazhe error deka nema ImageUrl
+                }
             });
             this.on("success", function (file, response){
                 const jsonResponse = JSON.parse(response);
                 if(jsonResponse.success){
                     document.getElementById("imageUrl").value = jsonResponse.ImageUrl;
+                    document.getElementById("addForm").submit();
                 }else{
                     console.error(jsonResponse.error);
                 }

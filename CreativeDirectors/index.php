@@ -43,7 +43,9 @@
         header("Location: .");
 
     } else if($action == "delete_director"){
-
+        if(file_exists($_POST["ImageUrl"])){
+            unlink($_POST["ImageUrl"]);
+        }
         delete_director($_POST["id"]);
         header("Location: .");
 

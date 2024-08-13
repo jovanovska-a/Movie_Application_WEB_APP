@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 
 
-<form action="index.php" method = "post">
+<form action="index.php" method = "post" enctype="multipart/form-data" id="addForm">
     <input hidden name="action" value="add_director"/>
     
     <input type="hidden" name="ImageUrl" id="imageUrl"/>
@@ -31,15 +31,27 @@
         maxFilesize: 20,
         maxFiles:1,
         acceptedFiles: "image/*",
+        autoProcessQueue: false,
         init: function(){
+            var myDropzone = this;
             this.on("maxfilesexceeded", function(file){
                this.removeAllFiles();
                this.addFile(file);
+            });
+            document.getElementById("addForm").addEventListener("submit", function(e){
+                e.preventDefault();
+
+                if(myDropzone.getQueuedFiles().length > 0){
+                    myDropzone.processQueue();
+                }else{
+                    this.submit; // ako nema slika prikacheno kje napravem submit i kje pokazhe error deka nema ImageUrl
+                }
             });
             this.on("success", function (file, response){
                 const jsonResponse = JSON.parse(response);
                 if(jsonResponse.success){
                     document.getElementById("imageUrl").value = jsonResponse.ImageUrl;
+                    document.getElementById("addForm").submit();
                 }else{
                     console.error(jsonResponse.error);
                 }

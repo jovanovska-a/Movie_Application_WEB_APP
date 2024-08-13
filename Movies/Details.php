@@ -117,6 +117,9 @@
                 value="delete" />
         <input type="hidden" name="movie_id"
                 value="<?php echo $details['MovieID']; ?>" />
+        
+        <input type="hidden" value="<?php echo $details["MovieImageUrl"] ?>" name="ImageUrl" />
+
         <input class="btn btn-sm btn-outline-secondary" type="submit" value="Delete" />
         <button type="button" class="btn btn-sm btn-outline-secondary">
             <a href="?action=show_edit_form&id=<?php echo $details['MovieID'] ?>" class="text-decoration-none text-dark">Edit</a>

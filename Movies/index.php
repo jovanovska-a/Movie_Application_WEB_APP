@@ -35,6 +35,9 @@
     } else if($action == "delete")
     {
         $id = $_POST['movie_id'];
+        if(file_exists($_POST["ImageUrl"])){
+            unlink($_POST["ImageUrl"]);
+        }
         delete_movie($id);
         header("Location: ./");
         exit();

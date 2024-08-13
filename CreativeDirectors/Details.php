@@ -11,6 +11,8 @@
 <form method="post">
     <input hidden value="delete_director" name="action"/>
     <input hidden value="<?php echo $director["CreativeDirectorID"] ?>" name="id"/>
+    <input hidden value="<?php echo $director["DirectorImageUrl"] ?>" name="ImageUrl"/>
+
     <button type="submit">Delete</button>
 </form>
 
