@@ -27,7 +27,7 @@
 <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 <script>
     Dropzone.options.dropzoneUpload = {
-        url: "upload_photo.php",
+        url: "../upload_photo.php",
         paramName: "photo",
         maxFilesize: 20,
         acceptedFiles: "image/*",
