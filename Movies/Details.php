@@ -99,7 +99,7 @@
     <h2><?php echo $details['Title']; ?></h2>
     <p><strong>Description: </strong> <?php echo $details['Description']; ?></p>
     <p><strong>Duration:</strong> <?php echo $details['Duration']; ?> minutes</p>
-    <p><strong>Creative Director:</strong> <?php echo $director_name ?></p>
+    <p><strong>Creative Director:</strong> <?php echo $details['DirectorName']; ?></p>
     <p><strong>Genres: </strong>
     <?php foreach($genres as $genre) : ?>
         <?php echo $genre['Name'] ?>
@@ -113,12 +113,14 @@
     <p><strong>Price:</strong> <?php echo $details['Price'] ?> $</p>
     <form action="." method="post">
         <button type="button" class="btn btn-sm btn-outline-secondary"><a href="../Movies" class="text-decoration-none">Go Back</a></button>
-            <input type="hidden" name="action"
-                    value="delete" />
-            <input type="hidden" name="movie_id"
-                    value="<?php echo $details['MovieID']; ?>" />
-            <input class="btn btn-sm btn-outline-secondary" type="submit" value="Delete" />
-            
+        <input type="hidden" name="action"
+                value="delete" />
+        <input type="hidden" name="movie_id"
+                value="<?php echo $details['MovieID']; ?>" />
+        <input class="btn btn-sm btn-outline-secondary" type="submit" value="Delete" />
+        <button type="button" class="btn btn-sm btn-outline-secondary">
+            <a href="?action=show_edit_form&id=<?php echo $details['MovieID'] ?>" class="text-decoration-none text-dark">Edit</a>
+        </button>
     </form>
   </div>  
 
