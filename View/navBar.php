@@ -1,16 +1,21 @@
-<?php
-$uri = $_SERVER["REQUEST_URI"];
-$uriArray = explode("/", $uri);
-$currentFolder = $uriArray[count($uriArray) - 2];
-?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .custom-navbar {
+            height: 80px; /* Change this value to the desired height */
+        }
+        .custom-navbar .navbar-brand,
+        .custom-navbar .nav-link {
+            line-height: 80px; /* This ensures that the content is vertically centered */
+            font-size: 1.2rem;
+        }
+    </style>
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light custom-navbar">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">MyMovies</a>
+        <a class="navbar-brand" style="font-size: 1.4rem;" href="#">MyMovies</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

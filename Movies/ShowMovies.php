@@ -8,31 +8,39 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .btn-custom {
-            background-color: #28a745; 
-            border-color: #28a745;
+            background-color: #007b5e; 
+            color: white;
+            border-color: #007b5e;
             font-size: 0.875rem; 
         }
         .btn-custom:hover {
-            background-color: #218838; 
-            border-color: #1e7e34;
+            background-color: beige; 
+            color: #007b5e;
+            border-color: #007b5e;
         }
-        .custom-btn-container {
-            display: flex;
-            justify-content: flex-end; 
-            margin-bottom: 1.5rem;
-        }
-        .search-add-form {
+        .search-add-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+        .search-forms {
+            display: flex;
+            align-items: center;
         }
         .search-bar {
             display: flex;
             align-items: center;
+            margin-right: 15px;
         }
-        .search-bar input {
-            margin-right: 10px; 
+        .search-bar input, .search-bar select {
+            margin-right: 5px; 
+        }
+        .section-title {
+            text-align: center;
+            color: #007b5e;
+            margin-bottom: 20px;
+            text-transform: uppercase;
         }
     </style>
 </head>
@@ -40,72 +48,42 @@
 <?php 
     require("../View/navBar.php");
 ?>
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">MyMovies</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="./">Movies</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../Actors">Actors</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../CreativeDirectors">Creative Directors</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sign In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Log In</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav> -->
 
-<div class="album py-3 bg-light">
+<div class="album py-4">
     <div class="container">
-        <form method="GET" class="search-add-form">
-            <div class="search-bar">
-                <input type="input" placeholder="Search actors" name="search" value ="<?php echo $search ?>"/>
-                <button type="submit">Search</button>
+        <div class="search-add-container">
+            <div class="search-forms">
+                <form method="GET" class="search-bar">
+                    <input type="input" placeholder="Search for movie by name.." name="search" value ="<?php echo $search ?>" class="form-control"/>
+                    <button type="submit" class="btn btn-outline-secondary">Search</button>
+                </form>
+                <form method="GET" class="search-bar">
+                    <select name="searchByGenreId" class="form-control" style="color: #6c757d;">
+                        <option selected value=0 > Search for movie by genre.. </option>
+                        <?php foreach($genres as $genre) :?>
+                        <option <?php if(isset($chosen) && $chosen == $genre["GenreID"]) : echo "selected"; endif;?> value="<?php echo $genre["GenreID"] ?>"> <?php echo $genre["Name"] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <button type="submit" class="btn btn-outline-secondary">Search</button>
+                </form>
             </div>
             <a href="?action=show_add_form" class="btn btn-custom">Add New Movie</a>
-        </form>
-
-
-    <!-- SEARCH MOVIES BY GENREID -->
-        <form method="GET">
-            <select name="searchByGenreId">
-                <option selected value=0> Select </option>
-                <?php foreach($genres as $genre) :?>
-                <option <?php if(isset($chosen) && $chosen == $genre["GenreID"]) : echo "selected"; endif;?> value="<?php echo $genre["GenreID"] ?>"> <?php echo $genre["Name"] ?></option>
-                <?php endforeach; ?>
-            </select>
-            <button type="submit">Search</button>
-        </form>
-
-
-
+        </div>
         <div class="row py-4">
+        <h5 class="section-title h3">MOVIES</h5>
             <?php foreach($movies as $movie) : ?>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" src="<?php echo $movie['MovieImageUrl'] ?>" alt="Card image cap">
-                        <div class="card-body">
-                            <p class="card-text"><?php echo $movie['Title'] ?></p>
-                            <p class="card-text">- <?php echo $movie['DirectorName'] ?></p>
+                        <img style="height: 400px;" class="card-img-top" src="<?php echo $movie['MovieImageUrl'] ?>" alt="Card image cap">
+                        <div class="card-body bg-light" style="height: 160px; color: #007b5e;">
+                            <div style="height: 0px; font-size: 1rem;">
+                                <p class="card-text"><?php echo $movie['Title'] ?></p>
+                            </div>
+                            <p class="card-text" style="font-size: 0.875rem;">- <?php echo $movie['DirectorName'] ?></p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-outline-secondary">
-                                        <a href="?action=details&id=<?php echo $movie['MovieID'] ?>" class="text-decoration-none text-dark">View</a>
+                                        <a href="?action=details&id=<?php echo $movie['MovieID'] ?>" class="text-decoration-none text-muted">View</a>
                                     </button>
                                     <button type="button" class="btn btn-sm btn-outline-secondary">Shop</button>
                                 </div>
@@ -122,6 +100,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
 
 
 

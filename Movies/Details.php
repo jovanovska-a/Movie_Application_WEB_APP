@@ -8,15 +8,14 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
+            background-color: white;
             color: #333;
             margin: 0;
-            padding: 20px;
         }
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background-color: #fff;
+            background-color: white;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             position: relative; /* Required for absolute positioning of button */
@@ -63,69 +62,45 @@
     </style>
 </head>
 <body>
-  <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">MyMovies</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Movies</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Actors</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Creative Directors</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sign In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Log In</a>
-                </li>
-            </ul>
-        </div>
+<?php 
+    require("../View/navBar.php");
+?>
+<div class="container" style="margin-top: 40px; display: flex; position: relative;">
+    <div style="width: 900px; height: 400px; margin-right: 20px;">
+        <img style="height: 400px;" class="movie-poster" src="<?php echo $details['MovieImageUrl']; ?>" alt="<?php echo $details['Title']; ?>">
     </div>
-</nav>
-
-  <div class="container" style="margin-top: 40px;">
-    <img class="movie-poster" src="<?php echo $details['MovieImageUrl']; ?>" alt="<?php echo $details['Title']; ?>">
-    <h2><?php echo $details['Title']; ?></h2>
-    <p><strong>Description: </strong> <?php echo $details['Description']; ?></p>
-    <p><strong>Duration:</strong> <?php echo $details['Duration']; ?> minutes</p>
-    <p><strong>Creative Director:</strong> <?php echo $details['DirectorName']; ?></p>
-    <p><strong>Genres: </strong>
-    <?php foreach($genres as $genre) : ?>
-        <?php echo $genre['Name'] ?>
-    <?php endforeach; ?>
-    </p>
-    <p><strong>Actors: </strong>
-        <?php foreach($actors as $actor) : ?>
-            <?php echo $actor['FullName'] ?>
-        <?php endforeach; ?>
-    </p>
-    <p><strong>Price:</strong> <?php echo $details['Price'] ?> $</p>
-    <form action="." method="post">
-        <button type="button" class="btn btn-sm btn-outline-secondary"><a href="../Movies" class="text-decoration-none">Go Back</a></button>
-        <input type="hidden" name="action"
-                value="delete" />
-        <input type="hidden" name="movie_id"
-                value="<?php echo $details['MovieID']; ?>" />
+    <div style="width: 1720px; height: 400px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+            <h2><?php echo $details['Title']; ?></h2>
+            <p><strong>Description: </strong> <?php echo $details['Description']; ?></p>
+            <p><strong>Duration:</strong> <?php echo $details['Duration']; ?> minutes</p>
+            <p><strong>Creative Director:</strong> <?php echo $details['DirectorName']; ?></p>
+            <p><strong>Genres: </strong>
+            <?php foreach($genres as $genre) : ?>
+                <?php echo $genre['Name'] ?>
+            <?php endforeach; ?>
+            </p>
+            <p><strong>Actors: </strong>
+                <?php foreach($actors as $actor) : ?>
+                    <?php echo $actor['FullName'] ?>
+                <?php endforeach; ?>
+            </p>
+            <p><strong>Price:</strong> <?php echo $details['Price'] ?> $</p>
+        </div> 
         
-        <input type="hidden" value="<?php echo $details["MovieImageUrl"] ?>" name="ImageUrl" />
+    </div> 
+</div>      
+<form action="." method="post" style="display: flex; gap: 10px; margin-left: 67%; margin-top: 20px;">
+            <input type="hidden" name="action" value="delete" />
+            <input type="hidden" name="movie_id" value="<?php echo $details['MovieID']; ?>" />
+            <input type="hidden" value="<?php echo $details["MovieImageUrl"] ?>" name="ImageUrl" />
+            <input class="btn btn-sm btn-outline-secondary" type="submit" value="Delete" />
+            <button type="button" class="btn btn-sm btn-outline-secondary">
+                <a href="?action=show_edit_form&id=<?php echo $details['MovieID'] ?>" class="text-decoration-none text-dark">Edit</a>
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-secondary"><a href="../Movies" class="text-decoration-none">Go Back</a></button>
+</form>
 
-        <input class="btn btn-sm btn-outline-secondary" type="submit" value="Delete" />
-        <button type="button" class="btn btn-sm btn-outline-secondary">
-            <a href="?action=show_edit_form&id=<?php echo $details['MovieID'] ?>" class="text-decoration-none text-dark">Edit</a>
-        </button>
-    </form>
-  </div>  
 
 <!-- Bootstrap JS (Popper.js is included with Bootstrap 5) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
