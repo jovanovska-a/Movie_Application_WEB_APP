@@ -76,7 +76,7 @@
                     <div class="card mb-4 box-shadow">
                         <img style="height: 400px;" class="card-img-top" src="<?php echo $movie['MovieImageUrl'] ?>" alt="Card image cap">
                         <div class="card-body bg-light" style="height: 160px; color: #007b5e;">
-                            <div style="height: 0px; font-size: 1rem;">
+                            <div style="height: 50px; font-size: 1rem;">
                                 <p class="card-text"><?php echo $movie['Title'] ?></p>
                             </div>
                             <p class="card-text" style="font-size: 0.875rem;">- <?php echo $movie['DirectorName'] ?></p>
