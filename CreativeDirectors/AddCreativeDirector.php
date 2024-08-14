@@ -1,6 +1,13 @@
 
 <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 
+<style>
+    #dropzone-upload{
+        width: 200px;
+        height: 200px;
+    }
+</style>
+
 
 <form action="index.php" method = "post" enctype="multipart/form-data" id="addForm">
     <input hidden name="action" value="add_director"/>

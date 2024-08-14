@@ -2,7 +2,7 @@
 
     function getAllMovies() {
         global $db;
-        $query = 'SELECT movies.*, creativedirectors.*
+        $query = 'SELECT movies.*, creativedirectors.FullName AS DirectorName
                 FROM movies
                 JOIN creativedirectors ON movies.CreativeDirectorID = creativedirectors.CreativeDirectorID
                 ORDER BY movies.MovieID';
@@ -95,6 +95,17 @@
             WHERE movies.Title LIKE '%$search%'
             GROUP BY movies.MovieID, creativedirectors.FullName
             ORDER BY movies.MovieID";
+        $result = $db->query($query);
+        return $result;
+    }
+
+    function get_movies_by_genre($genreID){
+        global $db;
+        $query = "SELECT movies.*, creativedirectors.FullName AS DirectorName FROM movies
+                  JOIN  movies_genres ON movies.MovieID = movies_genres.MovieID
+                  JOIN creativedirectors ON movies.CreativeDirectorID = creativedirectors.CreativeDirectorID
+                  WHERE movies_genres.GenreID = $genreID
+                  ORDER BY movies.MovieID";
         $result = $db->query($query);
         return $result;
     }

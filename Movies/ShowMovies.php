@@ -37,8 +37,10 @@
     </style>
 </head>
 <body>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<?php 
+    require("../View/navBar.php");
+?>
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">MyMovies</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +68,7 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav> -->
 
 <div class="album py-3 bg-light">
     <div class="container">
@@ -77,6 +79,21 @@
             </div>
             <a href="?action=show_add_form" class="btn btn-custom">Add New Movie</a>
         </form>
+
+
+    <!-- SEARCH MOVIES BY GENREID -->
+        <form method="GET">
+            <select name="searchByGenreId">
+                <option selected value=0> Select </option>
+                <?php foreach($genres as $genre) :?>
+                <option <?php if(isset($chosen) && $chosen == $genre["GenreID"]) : echo "selected"; endif;?> value="<?php echo $genre["GenreID"] ?>"> <?php echo $genre["Name"] ?></option>
+                <?php endforeach; ?>
+            </select>
+            <button type="submit">Search</button>
+        </form>
+
+
+
         <div class="row py-4">
             <?php foreach($movies as $movie) : ?>
                 <div class="col-md-4">

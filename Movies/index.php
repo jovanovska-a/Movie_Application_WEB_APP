@@ -17,9 +17,17 @@
 
         if(isset($_GET["search"])){
             $movies = get_movies_by_search($_GET["search"]);
+            $genres = get_genres();
             $search = $_GET["search"];
-        }else{
+        }else if(isset($_GET["searchByGenreId"]) && $_GET["searchByGenreId"] != 0){
+            $movies = get_movies_by_genre($_GET["searchByGenreId"]);
+            $genres = get_genres();
+            $chosen = $_GET["searchByGenreId"];
+            $search = "";
+        }
+        else{
             $movies = getAllMovies();
+            $genres = get_genres();
             $search = "";
         }
         include("ShowMovies.php"); 

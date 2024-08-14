@@ -2,10 +2,14 @@
 <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 
 <style>
-.dz-image img{
-   width: 100%;
-   height: 100%;
-}
+    .dz-image img{
+        width: 100%;
+        height: 100%;
+    }
+    #dropzone-upload{
+        width: 200px;
+        height: 200px;
+    }
 </style>
 
 <form method = "POST" enctype="multipart/form-data" id="editForm">
