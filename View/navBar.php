@@ -1,4 +1,5 @@
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
@@ -32,12 +33,18 @@
                 </li>
             </ul>
             <ul class="navbar-nav">
+                <?php if(!isset($_SESSION["logged_in"])) { ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sign In</a>
+                    <a class="nav-link" href="../Account/?action=register-form">Sign In</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Log In</a>
+                    <a class="nav-link" href="../Account/?action=login-form">Log In</a>
                 </li>
+                <?php }else{ ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Account/?action=logout">Log out</a>
+                </li>
+                <?php } ?>
             </ul>
         </div>
     </div>

@@ -1,4 +1,7 @@
 <?php 
+    
+    session_start();
+
     $dsn = "mysql:host=localhost;dbname=movies_db";
     $username = "root";
     $password = "";

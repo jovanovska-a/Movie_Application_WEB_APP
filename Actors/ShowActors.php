@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
+<?php 
+    require("../View/navBar.php");
+?>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actors</title>
@@ -82,16 +87,15 @@
 </head>
 <body>
 
-<?php 
-    require("../View/navBar.php");
-?>
 
 <div style="display: flex; justify-content: space-between; padding-top: 2%; padding-left: 3%; padding-right: 5%; height: 9%;">
     <form method="GET" class="search-bar">
         <input type="input" placeholder="Search actors" name="search" value ="<?php echo $search ?>" class="form-control"/>
         <button type="submit" class="btn btn-outline-secondary">Search</button>
     </form>
+    <?php if(isset($_SESSION["Role"]) AND $_SESSION["Role"] == "admin") : ?>
     <a href="?action=show_add_form" class="btn btn-primary">Add Actor</a>
+    <?php endif; ?>
 </div>
 
 <section id="team" class="py-3">
@@ -120,3 +124,11 @@
 </body>
 </html>
 
+<script>
+    $(document).ready(function() {
+        $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
+          $("#success-alert").slideUp(500);
+          $("#success-alert").remove();
+        });
+    });
+</script>
