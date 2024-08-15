@@ -2,18 +2,14 @@
 <html lang="en">
 <head>
     
-<?php 
-    require("../View/navBar.php");
-?>
-
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actors</title>
+    <title>Creative Directors</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <style>
+    <style> 
         .btn-primary:hover,
         .btn-primary:focus {
             background-color: #108d6f;
@@ -33,7 +29,7 @@
         section .section-title {
             text-align: center;
             color: #007b5e;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             text-transform: uppercase;
         }
         #team .card {
@@ -42,11 +38,9 @@
         }
         .frontside {
             position: relative;
-            -webkit-transform: rotateY(0deg);
-            -ms-transform: rotateY(0deg);
             z-index: 2;
-            margin-bottom: 35px;
-        }
+            margin-bottom: 30px;
+        }   
         .frontside .card {
             min-height: 400px;
         }
@@ -54,8 +48,8 @@
             color: #007b5e !important;
         }
         .frontside .card .card-body img {
-            width: 170px; 
-            height: 220px; 
+            width: 170px;
+            height: 220px;
             border-radius: 50%;
         }
         .search-forms {
@@ -69,11 +63,15 @@
             display: flex;
             align-items: center;
             margin-right: 15px;
-        }
+        }   
     </style>
 </head>
 <body>
 
+
+<?php 
+    require("../View/navBar.php");
+?>
 <div style="display: flex; justify-content: space-between; padding-top: 2%; padding-left: 3%; padding-right: 5%; height: 9%;">
     <form method="GET" class="search-bar">
         <input type="input" placeholder="Search actors" name="search" value ="<?php echo $search ?>" class="form-control"/>
@@ -106,11 +104,4 @@
 </body>
 </html>
 
-<script>
-    $(document).ready(function() {
-        $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
-          $("#success-alert").slideUp(500);
-          $("#success-alert").remove();
-        });
-    });
-</script>
+

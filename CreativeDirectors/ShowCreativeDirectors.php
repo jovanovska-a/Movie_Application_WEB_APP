@@ -37,8 +37,6 @@
         }
         .frontside {
             position: relative;
-            -webkit-transform: rotateY(0deg);
-            -ms-transform: rotateY(0deg);
             z-index: 2;
             margin-bottom: 30px;
         }   
