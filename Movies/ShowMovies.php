@@ -70,7 +70,7 @@
             <a href="?action=show_add_form" class="btn btn-custom">Add New Movie</a>
         </div>
         <div class="row py-4">
-        <h5 class="section-title h3">MOVIES</h5>
+        <h3 class="section-title h3" style="background-color: #f8f9fa;">MOVIES</h3>
             <?php foreach($movies as $movie) : ?>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
