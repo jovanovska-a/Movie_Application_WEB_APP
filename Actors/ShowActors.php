@@ -74,10 +74,6 @@
 </head>
 <body>
 
-<?php 
-    require("../View/navBar.php");
-?>
-
 <div style="display: flex; justify-content: space-between; padding-top: 2%; padding-left: 3%; padding-right: 5%; height: 9%;">
     <form method="GET" class="search-bar">
         <input type="input" placeholder="Search actors" name="search" value ="<?php echo $search ?>" class="form-control"/>
