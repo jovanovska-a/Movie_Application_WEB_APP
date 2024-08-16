@@ -55,7 +55,7 @@
     <div class="container">
         
         <div class="row py-4">
-        <h5 class="section-title h3">MOVIES</h5>
+        <h5 class="section-title h3">YOUR MOVIES</h5>
             <?php if(isset($_SESSION["logged_in"])) foreach($userMovies as $movie) : ?>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">

@@ -1,3 +1,12 @@
+
+<?php 
+    if(!isset($_SESSION["Role"]) || $_SESSION["Role"] != "admin") {
+        $error = "You dont have permision for this page";
+        header("Location: ../errors/error.php");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

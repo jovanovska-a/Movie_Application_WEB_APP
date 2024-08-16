@@ -42,6 +42,13 @@ if($action == "add_actor"){
 }
 
 if($action == "delete_actor"){
+
+    if(!isset($_SESSION["Role"]) || $_SESSION["Role"] != "admin") {
+        $error = "You dont have permision for this page";
+        header("Location: ../errors/error.php");
+        exit();
+    }
+    
     if(file_exists($_POST["ImageUrl"])){
         unlink($_POST["ImageUrl"]);
     }

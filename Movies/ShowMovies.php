@@ -67,7 +67,9 @@
                     <button type="submit" class="btn btn-outline-secondary">Search</button>
                 </form>
             </div>
+            <?php if(isset($_SESSION["Role"]) && $_SESSION["Role"] == "admin") : ?>
             <a href="?action=show_add_form" class="btn btn-custom">Add New Movie</a>
+            <?php endif; ?>
         </div>
         <div class="row py-4">
         <h3 class="section-title h3" style="background-color: #f8f9fa;">MOVIES</h3>

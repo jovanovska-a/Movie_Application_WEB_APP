@@ -42,6 +42,12 @@
 
     } else if($action == "delete")
     {
+        if(!isset($_SESSION["Role"]) || $_SESSION["Role"] != "admin") {
+            $error = "You dont have permision for this page";
+            header("Location: ../errors/error.php");
+            exit();
+        }
+        
         $id = $_POST['movie_id'];
         if(file_exists($_POST["ImageUrl"])){
             unlink($_POST["ImageUrl"]);

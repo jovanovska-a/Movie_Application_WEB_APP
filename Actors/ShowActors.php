@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creative Directors</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -68,21 +68,23 @@
 </head>
 <body>
 
-
 <?php 
     require("../View/navBar.php");
 ?>
-<div style="display: flex; justify-content: space-between; padding-top: 2%; padding-left: 3%; padding-right: 5%; height: 9%;">
+
+<div style="display: flex; justify-content: space-between; padding-top: 2%; padding-left: 10%; padding-right: 10%; height: 9%;">
     <form method="GET" class="search-bar">
         <input type="input" placeholder="Search actors" name="search" value ="<?php echo $search ?>" class="form-control"/>
         <button type="submit" class="btn btn-outline-secondary">Search</button>
     </form>
+    <?php if(isset($_SESSION["Role"]) && $_SESSION["Role"] == "admin") : ?>
     <a href="?action=show_add_form" class="btn btn-primary">Add Actor</a>
+    <?php endif; ?>
 </div>
 
 <section id="team" class="py-3">
     <div class="container">
-        <h5 class="section-title h3">ACTORS</h5>
+        <h3 class="section-title h3">ACTORS</h3>
         <div class="row">
             <?php foreach($actors as $actor) : ?>
             <div class="col-xs-12 col-sm-6 col-md-4">
@@ -97,8 +99,8 @@
                         </div>
                     </div>
                 </div>
-                <?php endforeach; ?>
             </div>
+            <?php endforeach; ?>
         </div>
     </section>
 </body>

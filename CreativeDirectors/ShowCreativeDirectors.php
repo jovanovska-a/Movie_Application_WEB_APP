@@ -74,7 +74,9 @@
             <input type="input" placeholder="Search creative directors" name="search" value ="<?php echo $search ?>" class="form-control"/>
             <button type="submit" class="btn btn-outline-secondary">Search</button>
         </form>
+        <?php if(isset($_SESSION["Role"]) && $_SESSION["Role"] == "admin") : ?>
         <a href="?action=show_add_form" class="btn btn-primary">Add Director</a>
+        <?php endif; ?>
     </div>
     <section id="team" class="py-3">
         <div class="container">

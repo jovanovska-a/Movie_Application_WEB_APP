@@ -2,6 +2,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <style>
         .custom-navbar {
             height: 80px; /* Change this value to the desired height */
@@ -13,6 +14,11 @@
         }
     </style>
 </head>
+
+<?php
+    $uriArray = explode("/" ,$_SERVER['REQUEST_URI']);
+    $currentFolder = $uriArray[count($uriArray) - 2];
+ ?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light custom-navbar">
     <div class="container-fluid">
