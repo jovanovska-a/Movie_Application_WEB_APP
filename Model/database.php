@@ -1,6 +1,6 @@
 <?php 
     
-    session_start();
+    require("../config.php");
 
     $dsn = "mysql:host=localhost;dbname=movies_db";
     $username = "root";
