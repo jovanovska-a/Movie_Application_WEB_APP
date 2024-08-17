@@ -90,16 +90,20 @@
         
     </div> 
 </div>      
-<form action="." method="post" style="display: flex; gap: 10px; margin-left: 67%; margin-top: 20px;">
-            <input type="hidden" name="action" value="delete" />
-            <input type="hidden" name="movie_id" value="<?php echo $details['MovieID']; ?>" />
-            <input type="hidden" value="<?php echo $details["MovieImageUrl"] ?>" name="ImageUrl" />
-            <input class="btn btn-sm btn-outline-secondary" type="submit" value="Delete" />
-            <button type="button" class="btn btn-sm btn-outline-secondary">
-                <a href="?action=show_edit_form&id=<?php echo $details['MovieID'] ?>" class="text-decoration-none text-dark">Edit</a>
-            </button>
-            <button type="button" class="btn btn-sm btn-outline-secondary"><a href="../Movies" class="text-decoration-none">Go Back</a></button>
-</form>
+<div style="display: flex; gap: 10px; margin-left: 67%; margin-top: 20px;">
+    <?php if(isset($_SESSION["Role"]) && $_SESSION["Role"] == "admin") : ?>
+    <form action="." method="post" >
+                <input type="hidden" name="action" value="delete" />
+                <input type="hidden" name="movie_id" value="<?php echo $details['MovieID']; ?>" />
+                <input type="hidden" value="<?php echo $details["MovieImageUrl"] ?>" name="ImageUrl" />
+                <input class="btn btn-sm btn-outline-secondary" type="submit" value="Delete" />
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                    <a href="?action=show_edit_form&id=<?php echo $details['MovieID'] ?>" class="text-decoration-none text-dark">Edit</a>
+                </button>
+    </form>
+    <?php endif; ?>
+    <button type="button" class="btn btn-sm btn-outline-secondary"><a href="../Movies" class="text-decoration-none">Go Back</a></button>
+</div>
 
 
 <!-- Bootstrap JS (Popper.js is included with Bootstrap 5) -->

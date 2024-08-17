@@ -1,3 +1,5 @@
+<?php $_SESSION["current_page_logout"] = $_SERVER["REQUEST_URI"] ?>
+
 <head>
 
     <meta charset="UTF-8">

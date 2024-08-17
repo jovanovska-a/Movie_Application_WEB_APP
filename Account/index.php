@@ -90,7 +90,12 @@ if($action == "register"){
 }
 
 if($action == "logout"){
+    if(isset($_SESSION["current_page_logout"])){
+        $previous_page = $_SESSION["current_page_logout"];
+    }else{
+        $previous_page = ".";
+    }
     session_unset();
     session_destroy();
-    header("Location: ../Actors");
+    header("Location: " . $previous_page);
 }
