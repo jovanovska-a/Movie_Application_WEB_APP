@@ -1,5 +1,13 @@
 <?php
 
+if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on') {
+    // Redirect to the HTTPS version of the URL
+    $redirect = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    header('HTTP/1.1 301 Moved Permanently');
+    header('Location: ' . $redirect);
+    exit();
+}
+
 ini_set("session.use_only_cookies", 1);
 ini_set("session.use_strict_mode", 1);
 
