@@ -28,10 +28,20 @@ if($action == "details"){
 }
 
 if($action == "show_add_form"){
+    if(!isset($_SESSION["Role"]) || $_SESSION["Role"] != "admin") {
+        header("Location: ../errors/unauthorized.php");
+        exit();
+    }
+
     include("AddActor.php");
 }
 
 if($action == "add_actor"){
+    if(!isset($_SESSION["Role"]) || $_SESSION["Role"] != "admin") {
+        header("Location: ../errors/unauthorized.php");
+        exit();
+    }
+
     if(empty($_POST["FullName"]) || empty($_POST["Biography"]) || empty($_POST["BirthDate"]) || empty($_POST["Nationality"]) || empty($_POST["ImageUrl"])){
         $error = "Invalid product data. Check all fields and try again.";
         include('../errors/error.php');
@@ -44,8 +54,7 @@ if($action == "add_actor"){
 if($action == "delete_actor"){
 
     if(!isset($_SESSION["Role"]) || $_SESSION["Role"] != "admin") {
-        $error = "You dont have permision for this page";
-        header("Location: ../errors/error.php");
+        header("Location: ../errors/unauthorized.php");
         exit();
     }
     
@@ -57,11 +66,21 @@ if($action == "delete_actor"){
 }
 
 if($action == "show_edit_form"){
+    if(!isset($_SESSION["Role"]) || $_SESSION["Role"] != "admin") {
+        header("Location: ../errors/unauthorized.php");
+        exit();
+    }
+    
     $actor = get_actor_by_actorId($_GET["actorID"]);
     include("EditActor.php");
 }
 
 if($action == "edit_actor"){
+    if(!isset($_SESSION["Role"]) || $_SESSION["Role"] != "admin") {
+        header("Location: ../errors/unauthorized.php");
+        exit();
+    }
+    
     if(empty($_POST["actorID"]) || empty($_POST["FullName"]) || empty($_POST["Biography"]) || empty($_POST["BirthDate"]) || empty($_POST["Nationality"]) || empty($_POST["ImageUrl"])){
         $error = "Invalid product data. Check all fields and try again.";
         include('../errors/error.php');
@@ -78,5 +97,6 @@ if($action == "edit_actor"){
     $actorID = $_POST["actorID"];
     header("Location: .?action=details&actorID=$actorID");
 }
+
 
 ?>

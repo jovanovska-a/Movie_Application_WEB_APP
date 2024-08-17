@@ -99,3 +99,4 @@ if($action == "logout"){
     session_destroy();
     header("Location: " . $previous_page);
 }
+

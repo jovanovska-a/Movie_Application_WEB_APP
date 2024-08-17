@@ -29,10 +29,19 @@
         include("Details.php");
 
     } else if($action == "show_add_form"){
+        if(!isset($_SESSION["Role"]) || $_SESSION["Role"] != "admin") {
+            header("Location: ../errors/unauthorized.php");
+            exit();
+        }
 
         include("AddCreativeDirector.php");
 
     } else if($action == "add_director"){
+
+        if(!isset($_SESSION["Role"]) || $_SESSION["Role"] != "admin") {
+            header("Location: ../errors/unauthorized.php");
+            exit();
+        }
 
         if(empty($_POST["FullName"]) || empty($_POST["Biography"]) || empty($_POST["BirthDate"]) || empty($_POST["Nationality"]) || empty($_POST["ImageUrl"])){
             $error = "Invalid product data. Check all fields and try again.";
@@ -45,8 +54,7 @@
     } else if($action == "delete_director"){
 
         if(!isset($_SESSION["Role"]) || $_SESSION["Role"] != "admin") {
-            $error = "You dont have permision for this page";
-            header("Location: ../errors/error.php");
+            header("Location: ../errors/unauthorized.php");
             exit();
         }
 
@@ -57,11 +65,20 @@
         header("Location: .");
 
     } else if($action == "show_edit_form"){
+        if(!isset($_SESSION["Role"]) || $_SESSION["Role"] != "admin") {
+            header("Location: ../errors/unauthorized.php");
+            exit();
+        }
 
         $director = get_director_by_directorId($_GET["id"]);
         include("EditCreativeDirector.php");
 
     } else if($action == "edit_director"){
+
+        if(!isset($_SESSION["Role"]) || $_SESSION["Role"] != "admin") {
+            header("Location: ../errors/unauthorized.php");
+            exit();
+        }
 
         if(empty($_POST["directorID"]) || empty($_POST["FullName"]) || empty($_POST["Biography"]) || empty($_POST["BirthDate"]) || empty($_POST["Nationality"]) || empty($_POST["ImageUrl"])){
             $error = "Invalid product data. Check all fields and try again.";
@@ -79,4 +96,5 @@
         $directorID = $_POST["directorID"];
         header("Location: .?action=details&id=$directorID");
     } 
+
 ?>

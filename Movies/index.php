@@ -50,8 +50,7 @@
     } else if($action == "delete")
     {
         if(!isset($_SESSION["Role"]) || $_SESSION["Role"] != "admin") {
-            $error = "You dont have permision for this page";
-            header("Location: ../errors/error.php");
+            header("Location: ../errors/unauthorized.php");
             exit();
         }
         
@@ -65,12 +64,22 @@
 
     } else if($action == "show_add_form"){
 
+        if(!isset($_SESSION["Role"]) || $_SESSION["Role"] != "admin") {
+            header("Location: ../errors/unauthorized.php");
+            exit();
+        }
+
         $genres = get_genres();
         $actors = get_allActors();
         $creative_directors = get_creative_directors();
         include('AddMovie.php');
 
     } else if($action == "add_movie"){
+
+        if(!isset($_SESSION["Role"]) || $_SESSION["Role"] != "admin") {
+            header("Location: ../errors/unauthorized.php");
+            exit();
+        }
 
         $selectedGenres = $_POST['genre_ids'];
         $selectedActors = $_POST['actor_ids'];
@@ -91,6 +100,10 @@
         }
 
     } else if($action == "show_edit_form"){
+        if(!isset($_SESSION["Role"]) || $_SESSION["Role"] != "admin") {
+            header("Location: ../errors/unauthorized.php");
+            exit();
+        }
 
         $id = $_GET['id'];
         $movie = getAllMovieDetailsById($id);
@@ -102,6 +115,11 @@
         include("EditMovie.php");
 
     } else if($action == "edit_movie"){
+
+        if(!isset($_SESSION["Role"]) || $_SESSION["Role"] != "admin") {
+            header("Location: ../errors/unauthorized.php");
+            exit();
+        }
 
         $id = $_POST['id'];
         $selectedGenres = $_POST['genre_ids'];
