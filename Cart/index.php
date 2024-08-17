@@ -20,11 +20,6 @@ if($action == "cart"){
     include("Cart.php");
 }
 
-if($action == "add-item"){
-    add_item_to_cart($_POST["UserID"], $_POST["MovieID"]);
-    header("Location: .");
-}
-
 if($action == "remove_item"){
     remove_item_from_cart($_POST["ID"]);
     header("Location: .");

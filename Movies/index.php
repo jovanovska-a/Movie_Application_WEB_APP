@@ -4,6 +4,8 @@
     require("../Model/creative_directors_db.php");
     require("../Model/actors_db.php");
     require("../Model/genres_db.php");
+    require("../Model/cart_db.php");
+    require("../Model/account_db.php");
 
     if(isset($_POST["action"])){
         $action = $_POST["action"];
@@ -30,6 +32,11 @@
             $genres = get_genres();
             $search = "";
         }
+
+        if(isset($_SESSION["UserID"])){
+            $user_movies = get_user_movies($_SESSION["UserID"]);
+        }
+
         include("ShowMovies.php"); 
 
     } else if($action == "details"){
@@ -121,5 +128,12 @@
             edit_movie($id, $selectedGenres, $selectedActors, $creative_director, $title, $duration, $description, $price, $date, $url);
             header("Location: .?action=details&id=$id");
         }
+
+    }else if($action == "add_item_to_cart"){
+        add_item_to_cart($_POST["UserID"], $_POST["MovieID"]);
+        $_SESSION["added_to_cart"] = "" ;
+        header("Location: .");
     }
+
+
 ?>

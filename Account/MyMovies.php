@@ -42,21 +42,24 @@
         }
     </style>
 
-<?php if(isset($_SESSION["success"])) : ?>
-        <div class="alert alert-success d-flex justify-content-center" id="success-alert" role="alert">
-        <?php 
-            echo $_SESSION["success"];
-            unset($_SESSION["success"]);
-         ?>
-        </div>
-<?php endif; ?>
+
 
 <div class="album py-4">
     <div class="container">
         
         <div class="row py-4">
-        <h5 class="section-title h3">YOUR MOVIES</h5>
-            <?php if(isset($_SESSION["logged_in"])) foreach($userMovies as $movie) : ?>
+            <h5 class="section-title h3">YOUR MOVIES</h5>
+            
+<!-- Ako ne e logiran da mu kazhe deka ne e logiran i da mu dade kopche koe go vode do login page i kodo podole da ne se izvrshe(die()) -->
+            <?php if(!isset($_SESSION["logged_in"])) : ?>
+                <h5 class="section-title h3">You are not logged in</h5>
+                <a class="nav-link" href="../Account/?action=login-form">Log In</a>
+            <?php 
+                die();
+                endif; 
+            ?>
+
+            <?php foreach($userMovies as $movie) : ?>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
                         <img style="height: 400px;" class="card-img-top" src="<?php echo $movie['MovieImageUrl'] ?>" alt="Card image cap">
@@ -68,9 +71,8 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-outline-secondary">
-                                        <a href="?action=details&id=<?php echo $movie['MovieID'] ?>" class="text-decoration-none text-muted">View</a>
+                                        <a href="../Movies/?action=details&id=<?php echo $movie['MovieID'] ?>" class="text-decoration-none text-muted">View</a>
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Shop</button>
                                 </div>
                                 <small class="text-muted">Price: <?php echo $movie['Price'] ?> $</small>
                             </div>
@@ -81,20 +83,3 @@
         </div>
     </div>
 </div>
-
-<?php if(!isset($_SESSION["logged_in"])) : ?>
-    <h5 class="section-title h3">You are not logged in</h5>
-    <a class="nav-link" href="../Account/?action=login-form">Log In</a>
-<?php endif; ?>
-
-
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
-          $("#success-alert").slideUp(500);
-          $("#success-alert").remove();
-        });
-    });
-</script>

@@ -55,3 +55,23 @@
         </div>
     </div>
 </nav>
+
+<?php if(isset($_SESSION["success"])) : ?>
+        <div class="alert alert-success d-flex justify-content-center" id="success-alert" role="alert">
+        <?php 
+            echo $_SESSION["success"];
+            unset($_SESSION["success"]);
+         ?>
+        </div>
+<?php endif; ?>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
+          $("#success-alert").slideUp(500);
+          $("#success-alert").remove();
+        });
+    });
+</script>

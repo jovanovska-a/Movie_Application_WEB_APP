@@ -87,7 +87,24 @@
                                     <button type="button" class="btn btn-sm btn-outline-secondary">
                                         <a href="?action=details&id=<?php echo $movie['MovieID'] ?>" class="text-decoration-none text-muted">View</a>
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Shop</button>
+                                    <?php 
+                                        if(isset($user_movies)) :
+                                            $exists = false;
+                                            foreach($user_movies as $user_movie){
+                                                if($user_movie["MovieID"] == $movie["MovieID"]){
+                                                    $exists = true;
+                                                    break;
+                                                }
+                                            }
+                                            if(!$exists) :
+                                    ?>
+                                    <form method="POST">
+                                        <input hidden name="action" value="add_item_to_cart"/>
+                                        <input hidden name="UserID" value=<?php echo $_SESSION["UserID"] ?>/>
+                                        <input hidden name="MovieID" value=<?php echo $movie["MovieID"] ?>/>
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary">Shop</button>
+                                    </form>
+                                    <?php endif; endif;?>
                                 </div>
                                 <small class="text-muted">Price: <?php echo $movie['Price'] ?> $</small>
                             </div>

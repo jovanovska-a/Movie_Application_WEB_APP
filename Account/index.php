@@ -48,6 +48,12 @@ if($action == "login"){
     $encodedID = base64_encode($user["UserID"]);
     $_SESSION["UserID"] = $encodedID;
 
+    if(isset($_SESSION["current_page"])){
+        $previous_page = $_SESSION["current_page"];
+        unset($SESSION["current_page"]);
+        header("Location: $previous_page");
+        exit();
+    }
     header("Location: .");
 }
 
