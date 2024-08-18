@@ -9,5 +9,5 @@
     }
 </style>
 <body>
-    <img src="../Images/NotFound.jpg" width="100%" height="100%" />
+    <img src="/MoviesShop/Images/NotFound.jpg" width="100%" height="100%" />
 </body>

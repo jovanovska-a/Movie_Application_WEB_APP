@@ -43,10 +43,10 @@
             <ul class="navbar-nav">
                 <?php if(!isset($_SESSION["logged_in"])) { ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="../Account/?action=register-form">Sign In</a>
+                    <a class="nav-link" href="../Account/Register">Sign In</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../Account/?action=login-form">Log In</a>
+                    <a class="nav-link" href="../Account/Login">Log In</a>
                 </li>
                 <?php }else{ ?>
                 <li class="nav-item">

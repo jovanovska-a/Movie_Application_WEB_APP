@@ -86,7 +86,9 @@ if($action == "register"){
     $password_hash = password_hash($_POST["Password"], PASSWORD_DEFAULT);
 
     register_user($_POST["Username"], $_POST["EmailAddress"], $password_hash , "user");
-    header("Location: ./Login.php");
+    $_SESSION["created"] = "Account created. Log in";
+    include("Login.php");
+    exit();
 }
 
 if($action == "logout"){
