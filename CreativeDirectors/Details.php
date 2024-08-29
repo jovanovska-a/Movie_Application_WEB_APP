@@ -43,22 +43,48 @@
         .director-details ul li {
             margin-bottom: 5px;
         }
-        .btn-custom {
-            background-color: #007b5e;
-            border-color: #007b5e;
-            font-size: 0.875rem;
+        .btn-delete {
+            background-color: #dc3545; /* Red color */
+            border-color: #dc3545;
             color: white;
+            font-size: 1rem;
         }
-        .btn-custom:hover {
-            background-color: #005f43;
-            border-color: #004d35;
+        .btn-delete:hover {
+            background-color: #c82333; /* Darker red on hover */
+            border-color: #bd2130;
+        }
+        .btn-edit {
+            background-color: #6c757d; /* Muted color */
+            border-color: #6c757d;
             color: white;
+            font-size: 1rem;
+        }
+        .btn-edit:hover {
+            background-color: #5a6268; /* Darker muted color on hover */
+            border-color: #545b62;
+        }
+        .btn-go-back {
+            background-color: #17a2b8; /* Light blue color */
+            border-color: #17a2b8;
+            color: white;
+            font-size: 1rem;
+        }
+        .btn-go-back:hover {
+            background-color: #138496; /* Darker light blue on hover */
+            border-color: #117a8b;
         }
         .btn-container {
             display: flex;
-            gap: 10px;
+            gap: 5px;
             margin-top: 20px;
             justify-content: flex-end;
+        }
+        .btn-container form {
+            margin: 0;
+        }
+        .btn-container a {
+            text-decoration: none;
+            color: white;
         }
     </style>
 </head>
@@ -89,23 +115,23 @@
         </div>
 
         <div class="btn-container">
-        <button type="button" class="btn btn-sm btn-outline-secondary"><a href="../CreativeDirectors" class="text-decoration-none">Go Back</a></button>
-            <form method="POST" action="index.php">
-                <input type="hidden" name="action" value="delete_director"/>
-                <input type="hidden" name="id" value="<?php echo htmlspecialchars($director['CreativeDirectorID']); ?>"/>
-                <input type="hidden" name="ImageUrl" value="<?php echo htmlspecialchars($director['DirectorImageUrl']); ?>"/>
-                <button type="submit" class="btn btn-custom">Delete</button>
-            </form>
-            <form method="GET" action="index.php">
-                <input type="hidden" name="action" value="show_edit_form"/>
-                <input type="hidden" name="id" value="<?php echo htmlspecialchars($director['CreativeDirectorID']); ?>"/>
-                <button type="submit" class="btn btn-custom">Edit</button>
-            </form>
+            <?php if (isset($_SESSION["Role"]) && $_SESSION["Role"] == "admin") : ?>    
+                <form method="POST" action="index.php">
+                    <input type="hidden" name="action" value="delete_director"/>
+                    <input type="hidden" name="id" value="<?php echo htmlspecialchars($director['CreativeDirectorID']); ?>"/>
+                    <input type="hidden" name="ImageUrl" value="<?php echo htmlspecialchars($director['DirectorImageUrl']); ?>"/>
+                    <button type="submit" class="btn btn-delete btn-sm">Delete</button>
+                </form>
+                <form method="GET" action="index.php">
+                    <input type="hidden" name="action" value="show_edit_form"/>
+                    <input type="hidden" name="id" value="<?php echo htmlspecialchars($director['CreativeDirectorID']); ?>"/>
+                    <button type="submit" class="btn btn-edit btn-sm">Edit</button>
+                </form>
+            <?php endif; ?>
+            <button type="button" class="btn btn-go-back btn-sm">
+                <a href="../CreativeDirectors" class="text-decoration-none text-white">Go Back</a>
+            </button>
         </div>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
-

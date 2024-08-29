@@ -148,9 +148,8 @@
         }
 
     }else if($action == "add_item_to_cart"){
-        add_item_to_cart($_POST["UserID"], $_POST["MovieID"]);
-        $_SESSION["added_to_cart"] = "" ;
-        header("Location: .");
+      add_item_to_cart($_POST["UserID"], $_POST["MovieID"]);
+        header("Location: ../Cart");
     }
 
 

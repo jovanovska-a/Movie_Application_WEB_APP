@@ -8,9 +8,9 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: white;
             color: #333;
             margin: 0;
+            background: none;
         }
         .container {
             max-width: 800px;
@@ -18,7 +18,7 @@
             background-color: white;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            position: relative; /* Required for absolute positioning of button */
+            position: relative;
         }
         .movie-poster {
             width: 100%;
@@ -45,19 +45,40 @@
         .clear {
             clear: both;
         }
-        .btn-custom {
-            background-color: #28a745; /* Green color */
-            border-color: #28a745;
-            font-size: 0.875rem; /* Slightly smaller font size */
+        .btn-delete {
+            background-color: #dc3545; /* Red color */
+            border-color: #dc3545;
+            color: white;
+            font-size: 1rem;
         }
-        .btn-custom:hover {
-            background-color: #218838; /* Darker green on hover */
-            border-color: #1e7e34;
+        .btn-delete:hover {
+            background-color: #c82333; /* Darker red on hover */
+            border-color: #bd2130;
+        }
+        .btn-edit {
+            background-color: #6c757d; /* Muted color */
+            border-color: #6c757d;
+            color: white;
+             font-size: 1rem;
+        }
+        .btn-edit:hover {
+            background-color: #5a6268; /* Darker muted color on hover */
+            border-color: #545b62;
+        }
+        .btn-go-back {
+            background-color: #17a2b8; /* Light blue color */
+            border-color: #17a2b8;
+            color: white;
+            font-size: 1rem;
+        }
+        .btn-go-back:hover {
+            background-color: #138496; /* Darker light blue on hover */
+            border-color: #117a8b;
         }
         .custom-btn-container {
-            position: absolute; /* Position button relative to the container */
-            top: 20px; /* Adjust the top position */
-            right: 20px; /* Adjust the right position */
+            position: absolute;
+            top: 20px;
+            right: 20px;
         }
     </style>
 </head>
@@ -87,24 +108,27 @@
             </p>
             <p><strong>Price:</strong> <?php echo $details['Price'] ?> $</p>
         </div> 
-        
     </div> 
 </div>      
-<div style="display: flex; gap: 10px; margin-left: 67%; margin-top: 20px;">
+<?php
+$marginLeft = isset($_SESSION["Role"]) && $_SESSION["Role"] == "admin" ? '67%' : '77%';
+?>
+<div style="display: flex; gap: 5px; margin-left: <?php echo $marginLeft; ?>; margin-top: 20px;">
     <?php if(isset($_SESSION["Role"]) && $_SESSION["Role"] == "admin") : ?>
-    <form action="." method="post" >
-                <input type="hidden" name="action" value="delete" />
-                <input type="hidden" name="movie_id" value="<?php echo $details['MovieID']; ?>" />
-                <input type="hidden" value="<?php echo $details["MovieImageUrl"] ?>" name="ImageUrl" />
-                <input class="btn btn-sm btn-outline-secondary" type="submit" value="Delete" />
-                <button type="button" class="btn btn-sm btn-outline-secondary">
-                    <a href="?action=show_edit_form&id=<?php echo $details['MovieID'] ?>" class="text-decoration-none text-dark">Edit</a>
-                </button>
+    <form action="." method="post">
+        <input type="hidden" name="action" value="delete" />
+        <input type="hidden" name="movie_id" value="<?php echo $details['MovieID']; ?>" />
+        <input type="hidden" value="<?php echo $details["MovieImageUrl"] ?>" name="ImageUrl" />
+        <input class="btn btn-sm btn-delete" type="submit" value="Delete" />
+        <button type="button" class="btn btn-sm btn-edit">
+            <a href="?action=show_edit_form&id=<?php echo $details['MovieID'] ?>" class="text-decoration-none text-white">Edit</a>
+        </button>
     </form>
     <?php endif; ?>
-    <button type="button" class="btn btn-sm btn-outline-secondary"><a href="../Movies" class="text-decoration-none">Go Back</a></button>
+    <button type="button" class="btn btn-sm btn-go-back">
+        <a href="../Movies" class="text-decoration-none text-white">Go Back</a>
+    </button>
 </div>
-
 
 <!-- Bootstrap JS (Popper.js is included with Bootstrap 5) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

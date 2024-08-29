@@ -4,14 +4,14 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         .custom-navbar {
-            height: 70px; /* Change this value to the desired height */
+            height: 70px; 
         }
         .custom-navbar .navbar-brand,
         .custom-navbar .nav-link {
-            line-height: 80px; /* This ensures that the content is vertically centered */
+            line-height: 80px;
             font-size: 1.2rem;
         }
         #separator{
@@ -20,6 +20,44 @@
             margin-left: .9rem;
             margin-right: 1.2rem;
         }
+        .btn-custom-green {
+            background-color: #007bff; /* Blue color for primary buttons */
+            border-color: #007bff;
+            color: white;
+        }
+
+        .btn-custom-green:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            border-color: #004085;
+            color: white; 
+        }
+        .btn-custom-signin {
+            background-color: #5bc0de; /* Light blue color */
+            border-color: #46b8da; /* Slightly darker border */
+            color: white; 
+        }
+
+        .btn-custom-signin:hover {
+            background-color: #31b0d5; /* Darker blue on hover */
+            border-color: #269abc;
+            color: white; 
+        }
+        .btn-custom-cart {
+            background: transparent; /* Blue color for primary buttons */
+            border: none;
+        }
+        .btn-custom-red {
+    background-color: #e60000; /* Very bright red */
+    border-color: #c60000;
+    color: white;
+}
+
+.btn-custom-red:hover {
+    background-color: #c60000; /* Darker, more intense red on hover */
+    border-color: #a40000;
+    color: white;
+}
+
         
     </style>
 </head>
@@ -31,33 +69,41 @@
 
 <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
     <div class="container-fluid">
-        <a class="navbar-brand" style="font-size: 1.4rem;color:white" href="#">MyMovies</a>
+    <a class="navbar-brand" style="font-size: 1.6rem; color: #007b5e; font-weight: bold;" href="../Account">
+    <i class="bi bi-film"></i> MyMovies
+    </a>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" <?php if($currentFolder == "Movies") echo "style='color:red'"; else echo "style='color:white'";?> href="../Movies">Movies</a>
+                    <a class="nav-link" <?php if($currentFolder == "Movies") echo "style='color:red'"; else echo "style='color: black'"?> href="../Movies">Movies</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" <?php if($currentFolder == "Actors") echo "style='color:red'"; else echo "style='color:white'";?> href="../Actors">Actors</a>
+                    <a class="nav-link" <?php if($currentFolder == "Actors") echo "style='color:red'"; else echo "style='color: black'";?> href="../Actors">Actors</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" <?php if($currentFolder == "CreativeDirectors") echo "style='color:red'"; else echo "style='color:white'";?> href="../CreativeDirectors">Creative Directors</a>
+                    <a class="nav-link" <?php if($currentFolder == "CreativeDirectors") echo "style='color:red'"; else echo "style='color: black'";?> href="../CreativeDirectors">Creative Directors</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
                 <?php if(!isset($_SESSION["logged_in"])) { ?>
                 <li class="nav-item">
-                    <a class="nav-link" <?php if($uriArray[count($uriArray) - 1] == "Register") echo "style='color:red'"; else echo "style='color:white'";?> href="../Account/Register">Sign In</a>
+                <a class="btn btn-custom-signin me-2" href="../Account/Register">Sign Up</a>
+
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" <?php if($uriArray[count($uriArray) - 1] == "Login") echo "style='color:red'"; else echo "style='color:white'";?> href="../Account/Login">Log In</a>
+                <a class="btn btn-custom-green" href="../Account/Login">Log In</a>
+
                 </li>
                 <?php }else{ ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="../Account/?action=logout">Log out</a>
+                    <a class="btn btn-custom-cart me-2"  href="../Cart"><i class="bi bi-cart"></i> Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-custom-red" " href="../Account/?action=logout">Log out</a>
                 </li>
                 <?php } ?>
             </ul>
@@ -65,15 +111,8 @@
     </div>
 </nav>
 
-<div id=separator></div>
+<div id="separator"></div>
 
-<body  style="
-        background-image: url(https://img.freepik.com/free-photo/movie-background-collage_23-2149876028.jpg?t=st=1724062348~exp=1724065948~hmac=5205772cc694be8a1297a350a557625cf1eac0e7ba7140b8e89920118992fefd&w=996);
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center">
-</body>
 
 <?php if(isset($_SESSION["success"])) : ?>
         <div class="alert alert-success d-flex justify-content-center" id="success-alert" role="alert">
