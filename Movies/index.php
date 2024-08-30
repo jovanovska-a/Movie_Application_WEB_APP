@@ -34,7 +34,11 @@
         }
 
         if(isset($_SESSION["UserID"])){
-            $user_movies = get_user_movies($_SESSION["UserID"]);
+            $user_movies_pdo = get_user_movies($_SESSION["UserID"]);
+            $user_movies = array();
+            foreach($user_movies_pdo as $usp){
+                array_push($user_movies, $usp);
+            }
         }
 
         include("ShowMovies.php"); 
