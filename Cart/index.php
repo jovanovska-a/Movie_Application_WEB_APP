@@ -30,7 +30,7 @@ if($action == "buy_movies"){
         $error = "You are not logged in";
         include("../errors/error.php");   
     }
-    //$user_email = get_user_email($_SESSION["UserID"]);
+    $user_email = get_user_email($_SESSION["UserID"]);
     $items = get_user_cart($_SESSION["UserID"]);
     //$total_price = 0;
     foreach($items as $item){
@@ -38,8 +38,8 @@ if($action == "buy_movies"){
         remove_item_from_cart($item["ID"]);
        // $total_price += $item["Price"]; 
     }
-    //$to = $user_email;
-    $to = 'anastasijajovanovska25@gmail.com';
+    $to = $user_email;
+    //$to = 'anastasijajovanovska25@gmail.com';
     $subject = 'Order Confirmation';
     $message = "Thank you for your purchase! \n\nWe hope you enjoy your movies!";
     $headers = 'From: no-reply@yourdomain.com' . "\r\n" .

@@ -36,7 +36,7 @@
                   WHERE users.UserID = '$userID'";
         $result = $db->query($query);
         $user = $result->fetch();
-        return $user;
+        return $user['EmailAddress'];
     }
 
     function add_user_movie($UserIDencrypted, $MovieID){
