@@ -3,7 +3,9 @@
 require("../Model/database.php");
 require("../Model/cart_db.php");
 require("../Model/account_db.php");
-
+require '/Users/anastasijajovanovska/vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 if(isset($_POST["action"])){
     $action = $_POST["action"];
@@ -31,29 +33,34 @@ if($action == "buy_movies"){
         include("../errors/error.php");   
     }
     $user_email = get_user_email($_SESSION["UserID"]);
+    $username = get_user_username($_SESSION["UserID"]);
     $items = get_user_cart($_SESSION["UserID"]);
-    //$total_price = 0;
+    $total_price = 0;
     foreach($items as $item){
         add_user_movie($_SESSION["UserID"], $item["MovieID"]);
         remove_item_from_cart($item["ID"]);
-       // $total_price += $item["Price"]; 
+        $total_price += $item["Price"]; 
     }
-    $to = $user_email;
-    //$to = 'anastasijajovanovska25@gmail.com';
-    $subject = 'Order Confirmation';
-    $message = "Thank you for your purchase! \n\nWe hope you enjoy your movies!";
-    $headers = 'From: no-reply@yourdomain.com' . "\r\n" .
-               'Reply-To: no-reply@yourdomain.com' . "\r\n" .
-               'X-Mailer: PHP/' . phpversion();
-    if (mail($to, $subject, $message, $headers)) {
-        echo 'Email sent successfully!';
-    } else {
-        echo 'Failed to send email.';
-    }
-    //header("Location: ../Account");
+    $mail = new PHPMailer(true);
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'anastasijajovanovska25@gmail.com';
+            $mail->Password = 'norb qvmf qtpi jorq';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+            $mail->setFrom('mymovies@gmail.com', 'MyMovies');
+            $mail->addAddress($user_email, $username);
+            $mail->isHTML(true);        
+            $mail->Subject = 'Order Confirmation';
+            $mail->Body    = "Thank you for your purchase of \${$total_price}!\n\nWe hope you enjoy your movies!";
+            $mail->AltBody = "Thank you for your purchase!\n\nWe hope you enjoy your movies!";
+            $mail->send();
+            header("Location: ../Account");
+        } catch (Exception $e) {
+            echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+        }
     exit;
 }
-
-
-
 ?>

@@ -39,6 +39,16 @@
         return $user['EmailAddress'];
     }
 
+    function get_user_username($UserIDencrypted){
+        global $db;
+        $userID = base64_decode($UserIDencrypted);
+        $query = "SELECT Username FROM users
+                  WHERE users.UserID = '$userID'";
+        $result = $db->query($query);
+        $user = $result->fetch();
+        return $user['Username'];
+    }
+
     function add_user_movie($UserIDencrypted, $MovieID){
         global $db;
         $userID = base64_decode(($UserIDencrypted));
