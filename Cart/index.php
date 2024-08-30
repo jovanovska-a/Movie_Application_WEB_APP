@@ -30,15 +30,30 @@ if($action == "buy_movies"){
         $error = "You are not logged in";
         include("../errors/error.php");   
     }
-
+    //$user_email = get_user_email($_SESSION["UserID"]);
     $items = get_user_cart($_SESSION["UserID"]);
+    //$total_price = 0;
     foreach($items as $item){
         add_user_movie($_SESSION["UserID"], $item["MovieID"]);
         remove_item_from_cart($item["ID"]);
+       // $total_price += $item["Price"]; 
     }
-    header("Location: ../Account");
+    //$to = $user_email;
+    $to = 'anastasijajovanovska25@gmail.com';
+    $subject = 'Order Confirmation';
+    $message = "Thank you for your purchase! \n\nWe hope you enjoy your movies!";
+    $headers = 'From: no-reply@yourdomain.com' . "\r\n" .
+               'Reply-To: no-reply@yourdomain.com' . "\r\n" .
+               'X-Mailer: PHP/' . phpversion();
+    if (mail($to, $subject, $message, $headers)) {
+        echo 'Email sent successfully!';
+    } else {
+        echo 'Failed to send email.';
+    }
+    //header("Location: ../Account");
     exit;
 }
+
 
 
 ?>

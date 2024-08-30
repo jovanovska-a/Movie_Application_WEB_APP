@@ -50,7 +50,7 @@ if($action == "login"){
 
     if(isset($_SESSION["current_page"])){
         $previous_page = $_SESSION["current_page"];
-        unset($SESSION["current_page"]);
+        unset($_SESSION["current_page"]);
         header("Location: $previous_page");
         exit();
     }

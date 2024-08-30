@@ -29,6 +29,16 @@
         return $result;
     }
 
+    function get_user_email($UserIDencrypted){
+        global $db;
+        $userID = base64_decode($UserIDencrypted);
+        $query = "SELECT EmailAddress FROM users
+                  WHERE users.UserID = '$userID'";
+        $result = $db->query($query);
+        $user = $result->fetch();
+        return $user;
+    }
+
     function add_user_movie($UserIDencrypted, $MovieID){
         global $db;
         $userID = base64_decode(($UserIDencrypted));
@@ -37,6 +47,5 @@
         
         $db->exec($query);
     }
-
 
 ?>
