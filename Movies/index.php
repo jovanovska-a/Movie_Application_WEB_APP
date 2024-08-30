@@ -35,9 +35,14 @@
 
         if(isset($_SESSION["UserID"])){
             $user_movies_pdo = get_user_movies($_SESSION["UserID"]);
+            $user_cart_pdo = get_user_cart($_SESSION["UserID"]);
             $user_movies = array();
+            $user_cart = array();
             foreach($user_movies_pdo as $usp){
                 array_push($user_movies, $usp);
+            }
+            foreach($user_cart_pdo as $ucp){
+                array_push($user_cart, $ucp);
             }
         }
 

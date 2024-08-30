@@ -110,22 +110,30 @@
                                     </button>
                                     <?php 
                                         if(isset($user_movies)) :
-                                            $exists = false;
+                                            $exists = "false";
                                             foreach($user_movies as $user_movie){
                                                 if($user_movie["MovieID"] == $movie["MovieID"]){
-                                                    $exists = true;
+                                                    $exists = "true";
                                                     break;
                                                 }
                                             }
-                                            if(!$exists) :
-                                    ?>
+                                            foreach($user_cart as $uc){
+                                                if($uc["MovieID"] == $movie["MovieID"]){
+                                                    $exists = "shop";
+                                                    break;
+                                                }
+                                            }
+                                            if($exists == "shop") { ?>
+                                                <button disabled type="submit" class="btn btn-sm btn-outline-secondary btn-custom-shop">In Cart</button>
+                                           <?php } else if($exists == "false"){ ?>
+
                                     <form method="POST">
                                         <input hidden name="action" value="add_item_to_cart"/>
                                         <input hidden name="UserID" value="<?php echo $_SESSION["UserID"] ?>"/>
                                         <input hidden name="MovieID" value="<?php echo $movie["MovieID"] ?>"/>
                                         <button type="submit" class="btn btn-sm btn-outline-secondary btn-custom-shop">Shop</button>
                                     </form>
-                                    <?php endif; endif;?>
+                                    <?php }; endif;?>
                                 </div>
                                 <small class="text-muted">Price: <?php echo $movie['Price'] ?> $</small>
                             </div>
