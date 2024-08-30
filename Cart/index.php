@@ -46,8 +46,8 @@ if($action == "buy_movies"){
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'anastasijajovanovska25@gmail.com';
-            $mail->Password = 'norb qvmf qtpi jorq';
+            $mail->Username = 'my.movies.application25@gmail.com';
+            $mail->Password = 'gbwl ioue cfsp zjbo';
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
             $mail->setFrom('mymovies@gmail.com', 'MyMovies');
